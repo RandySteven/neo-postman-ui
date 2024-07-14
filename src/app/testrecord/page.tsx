@@ -8,7 +8,7 @@ export default async function Page() {
     let records = results.data.records
     return (
         <Fragment>
-            <div className="grid">
+                <div className="grid">
                 {records.map((record: TestRecords) => (
                     <TestRecordsCard 
                         id={record.id}

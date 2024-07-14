@@ -1,3 +1,4 @@
+import { TestDataRequest } from "@/interfaces/api/TestDataRequest"
 import { ApiLink } from "./ApiLink"
 
 export async function getTestDatas() {
@@ -11,6 +12,16 @@ export async function getTestDatas() {
     return data
 }
 
-export async function createTestData() {
+export async function createTestData(request:TestDataRequest) {
     let baseHost = ApiLink + "/testdata"
+
+    const res = await fetch(baseHost, {
+        method: 'POST',
+        body: JSON.stringify(request),
+        headers: {
+            'content-type': 'application/json'
+        }
+    })
+
+    return res.json()
 }
