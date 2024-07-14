@@ -25,12 +25,6 @@ export async function createTestData(request:TestDataRequest) {
     if(!res.ok) {
         throw new Error(`Failed to fetch data: ${res.status} - ${res.statusText}`);
     }
-    const data = await res.json();
-
-    // Check for errors in the response body
-    if (data.error) {
-      throw new Error(data.error.message);
-    }
-  
+    const data = res.json();
     return data;
 }

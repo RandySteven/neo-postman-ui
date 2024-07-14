@@ -8,7 +8,8 @@ import { FormEvent, Fragment, useState } from "react"
 export const TestDataForm = () => {
     const [testDataRequest, setTestDataRequest] = useState<TestDataRequest>({
         method: "POST",
-        endpoint: "",
+        path: "",
+        description: "test",
         request_header: "",
         request_body: "",
         expected_response_code: 200,
@@ -27,13 +28,16 @@ export const TestDataForm = () => {
         e.preventDefault()
         const requestData : TestDataRequest = {
             ...testDataRequest,
+            expected_response_code: Number(testDataRequest.expected_response_code),
             request_header: testDataRequest.request_header!=""?JSON.parse(testDataRequest.request_header):null,
             request_body: testDataRequest.request_body!=""?JSON.parse(testDataRequest.request_body):null,
             expected_response: testDataRequest.expected_response!=""?JSON.parse(testDataRequest.expected_response):null
         }
-        console.log(requestData)
-        const res = await createTestData(requestData)
-        console.log(res)
+        const res = await createTestData(requestData).then((res) => {
+            console.log(res)
+        }).catch((err) => {
+            console.log("error : "+err)
+        })
     }
 
     return <Fragment>
@@ -55,11 +59,11 @@ export const TestDataForm = () => {
                 <option value="DELETE">DELETE</option>
               </select>
               <input
-                name="endpoint"
+                name="path"
                 type="text"
                 className="flex w-36 w-full py-2 px-2 border border-black"
                 placeholder="/endpoint"
-                value={testDataRequest.endpoint}
+                value={testDataRequest.path}
                 onChange={handleChange}
               />
             </div>
