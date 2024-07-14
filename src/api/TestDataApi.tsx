@@ -10,3 +10,7 @@ export async function getTestDatas() {
     const data = res.json()
     return data
 }
+
+export async function createTestData() {
+    let baseHost = ApiLink + "/testdata"
+}

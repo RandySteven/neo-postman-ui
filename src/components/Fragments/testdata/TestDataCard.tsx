@@ -4,13 +4,7 @@ import { Records } from "@/interfaces/api/Record";
 import { Fragment, useState } from "react";
 
 export const TestDataCard = (record : Records) => {
-    // let [resultStatusClass, setResultStatusClass] = useState<string>("bg-blue-500")
-    // if(record.result_status == "expected") {
-    //     setResultStatusClass("text-white bg-green-500")
-    // }else if(record.result_status == "unexpected") {
-    //     setResultStatusClass("text-white bg-yellow-500")
-    // }
-    let resultStatusClass = ""
+   let resultStatusClass = ""
     if(record.result_status == "expected") {
         resultStatusClass=("text-white bg-green-500")
     }else if(record.result_status == "unexpected") {
