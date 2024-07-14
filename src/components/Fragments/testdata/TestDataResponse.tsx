@@ -25,7 +25,7 @@ export const TestDataResponse = () => {
               <label>Actual Response</label>
               <textarea
                 className="w-full border border-green-500 px-3 py-2"
-                rows="8"
+                rows={8}
                 readOnly
               ></textarea>
             </div>

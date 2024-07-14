@@ -24,7 +24,7 @@ export const TestDataForm = () => {
               <label>Request Body</label>
               <textarea
                 className="w-full border border-blue-500 px-3 py-2"
-                rows="8"
+                rows={8}
               ></textarea>
             </div>
             <div className="flex my-2">
@@ -39,7 +39,7 @@ export const TestDataForm = () => {
               <label>Expected Response</label>
               <textarea
                 className="w-full border border-blue-500 px-3 py-2"
-                rows="8"
+                rows={8}
               ></textarea>
             </div>
             <div className="my-2">
