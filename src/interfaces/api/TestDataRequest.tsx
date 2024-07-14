@@ -1,8 +1,8 @@
 export interface TestDataRequest {
     method: string;
     endpoint: string;
-    requestHeader: any;
-    requestBody: string;
-    expectedResponseCode: number;
-    expectedResponse: string;
+    request_header: any;
+    request_body: any;
+    expected_response_code: number;
+    expected_response: any;
 }

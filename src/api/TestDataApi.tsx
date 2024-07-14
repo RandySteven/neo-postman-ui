@@ -19,9 +19,18 @@ export async function createTestData(request:TestDataRequest) {
         method: 'POST',
         body: JSON.stringify(request),
         headers: {
-            'content-type': 'application/json'
+            'Content-Type': 'application/json',
         }
     })
+    if(!res.ok) {
+        throw new Error(`Failed to fetch data: ${res.status} - ${res.statusText}`);
+    }
+    const data = await res.json();
 
-    return res.json()
+    // Check for errors in the response body
+    if (data.error) {
+      throw new Error(data.error.message);
+    }
+  
+    return data;
 }
