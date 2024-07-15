@@ -19,3 +19,14 @@ export async function saveTestDataToRecord(url : string) {
     const data = res.json()
     return data
 }
+
+export async function getTestRecordDetail(id : string) {
+    let baseHos = ApiLink + "/testrecord/" + id 
+    console.log(baseHos)
+    const res = await fetch(baseHos)
+    if(!res.ok) {
+        throw new Error('failed to save')
+    }
+    const data = res.json()
+    return data
+}

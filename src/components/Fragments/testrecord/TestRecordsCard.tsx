@@ -1,4 +1,5 @@
 import { TestRecords } from "@/interfaces/api/TestRecords";
+import Link from "next/link";
 import { Fragment } from "react";
 
 export const TestRecordsCard = (record : TestRecords) => {
@@ -10,7 +11,7 @@ export const TestRecordsCard = (record : TestRecords) => {
                     {record.description}
                 </div>
                 <div className="my-2">
-                    <a href={record.links.detail} className="bg-blue-500 text-white px-2 py-2 rounded hover:bg-blue-600">See detail</a>
+                    <Link href={`/testrecord/${record.id}`} className="bg-blue-500 text-white px-2 py-2 rounded hover:bg-blue-600">See detail</Link>
                 </div>
             </div>
         </Fragment>
