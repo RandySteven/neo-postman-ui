@@ -3,8 +3,6 @@
 import { Fragment, lazy } from "react"
 
 export const TestDataResponse = () => {
-    let resultStatus = localStorage.getItem("resultStatus")?.toString()
-    console.log(resultStatus)
     return <Fragment>
           <form className="h-full w-full my-5 grid content-center border border-green-500 py-2 pt-6 px-5">
             <div className="flex mb-1">
@@ -13,7 +11,6 @@ export const TestDataResponse = () => {
                 type="text"
                 className="flex w-64 w-full py-2 px-2 border border-green-500 rounded"
                 placeholder="Expected, Unexpected, Error"
-                value={resultStatus}
                 readOnly
               />
             </div>

@@ -1,8 +1,9 @@
 "use client";
 
 import { createTestData } from "@/api/TestDataApi";
+import JsonTextarea from "@/components/Elements/TextArea";
 import { TestDataRequest } from "@/interfaces/api/TestDataRequest";
-import { FormEvent, Fragment, useState } from "react"
+import { FormEvent, Fragment, useState, ChangeEvent, useEffect } from "react"
 
 
 export const TestDataForm = () => {
@@ -15,14 +16,26 @@ export const TestDataForm = () => {
         expected_response_code: 200,
         expected_response: "",
     })
+    const [bgColor, setBgColor] = useState('');
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-        const { name, value } = e.target;
+      // const selectedTarget = e.target as HTMLSelectElement;
+      // const selectedOption = selectedTarget.options[selectedTarget.selectedIndex] 
+      // const color = selectedOption.getAttribute('data-bg-color');
+      // setBgColor(color || '');  
+      const { name, value } = e.target;
         setTestDataRequest(prevState => ({
             ...prevState,
             [name]: value,
         }));
     };
+
+    useEffect(() => {
+      // Set initial background color based on the first option
+      const select = document.getElementById('method') as HTMLSelectElement;
+      const initialSelectedOption = select.options[select.selectedIndex];
+      setBgColor(initialSelectedOption.getAttribute('data-bg-color') || '');
+    }, []);
 
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault()
@@ -53,15 +66,17 @@ export const TestDataForm = () => {
             >
             <div className="flex mb-1">
               <select 
+                id="method"
                 className="mr-3 flex w-36 py-2 bg-gray-400 text-white border rounded" 
                 name="method"
                 value={testDataRequest.method}
                 onChange={handleChange}
+                style={{backgroundColor: bgColor}}
             >
-                <option value="POST">POST</option>
-                <option value="GET">GET</option>
-                <option value="PUT">PUT</option>
-                <option value="DELETE">DELETE</option>
+                <option value="POST" data-bg-color="orange">POST</option>
+                <option value="GET" data-bg-color="green">GET</option>
+                <option value="PUT" data-bg-color="blue">PUT</option>
+                <option value="DELETE" data-bg-color="red">DELETE</option>
               </select>
               <input
                 name="path"
@@ -104,13 +119,18 @@ export const TestDataForm = () => {
             </div>
             <div className="my-2">
               <label>Expected Response</label>
-              <textarea
-                name="expected_response"
-                className="w-full border border-blue-500 px-3 py-2"
-                rows={8}
-                value={testDataRequest.expected_response}
-                onChange={handleChange}
-              ></textarea>
+              <JsonTextarea 
+                              name="expected_response"
+                              className="w-full border border-blue-500 px-3 py-2"
+                              rows={8}
+                              value={testDataRequest.expected_response}
+                              onChange={handleChange}
+              />
+              {/* <textarea name="expected_response"
+                              className="w-full border border-blue-500 px-3 py-2"
+                              rows={8}
+                              value={testDataRequest.expected_response}
+                              onChange={handleChange}></textarea> */}
             </div>
             <div className="my-2">
               <button className="w-full bg-blue-500 hover:bg-blue-600 text-white py-4 rounded" type="submit">

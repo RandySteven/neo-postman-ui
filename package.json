@@ -9,10 +9,14 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "json5": "^2.2.3",
+    "jsonlint": "^1.6.3",
     "next": "14.2.5",
+    "nomnom": "^1.8.1",
     "react": "^18",
     "react-dom": "^18",
-    "styled-components": "^6.1.11"
+    "styled-components": "^6.1.11",
+    "underscore": "^1.13.6"
   },
   "devDependencies": {
     "@types/node": "^20",
