@@ -33,11 +33,16 @@ export const TestDataForm = () => {
             request_body: testDataRequest.request_body!=""?JSON.parse(testDataRequest.request_body):null,
             expected_response: testDataRequest.expected_response!=""?JSON.parse(testDataRequest.expected_response):null
         }
-        const res = await createTestData(requestData).then((res) => {
-            console.log(res)
-        }).catch((err) => {
-            console.log("error : "+err)
-        })
+        console.log(JSON.stringify(requestData))
+        const res = await createTestData(requestData)
+        console.log(res)
+        localStorage.setItem("resultStatus", res.data.test_result.result_status)
+        if(res.data.test_result.actual_response_code != null){
+          localStorage.setItem("actualResponseCode", res.data.test_result.actual_response_code)
+        }
+        if(res.data.test_result.actual_response != null) {
+          localStorage.setItem("actualResponse", res.data.test_result.actual_response)
+        }
     }
 
     return <Fragment>

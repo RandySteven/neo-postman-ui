@@ -13,18 +13,29 @@ export async function getTestDatas() {
 }
 
 export async function createTestData(request:TestDataRequest) {
-    let baseHost = ApiLink + "/testdata"
+    let baseHost = ApiLink + "/testdata";
 
+  try {
     const res = await fetch(baseHost, {
-        method: 'POST',
-        body: JSON.stringify(request),
-        headers: {
-            'Content-Type': 'application/json',
-        }
-    })
-    if(!res.ok) {
-        throw new Error(`Failed to fetch data: ${res.status} - ${res.statusText}`);
+      method: 'POST',
+      body: JSON.stringify(request),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+
+    if (!res.ok) {
+      throw new Error(`Failed to fetch data: ${res.status} - ${res.statusText}`);
     }
-    const data = res.json();
+
+    const data = await res.json();
+    console.log(data)
     return data;
+  } catch (error) {
+    // Handle specific error types or log the error for debugging
+    if (error instanceof Error) {
+      console.error('Error creating test data:', error.message);
+    }
+    throw error; // Rethrow the error to the caller
+  }
 }
