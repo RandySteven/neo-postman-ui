@@ -168,7 +168,7 @@ export const TestDataForm = () => {
               />
             </td>
             <td className="border border-blue-500 p-2 text-center">
-              <button type="button" onClick={() => removeRow(index, type)}>
+              <button type="button" onClick={() => removeRow(index, type)} className="bg-red-500 hover:bg-red-600 text-white px-2 py-2 rounded">
                 Remove
               </button>
             </td>
@@ -176,7 +176,7 @@ export const TestDataForm = () => {
         ))}
         <tr>
           <td colSpan={4} className="text-center p-2">
-            <button type="button" onClick={() => addRow(type)}>
+            <button type="button" onClick={() => addRow(type)} className="bg-blue-500 text-white hover:bg-blue-600 px-2 py-2 rounded">
               Add Row
             </button>
           </td>
