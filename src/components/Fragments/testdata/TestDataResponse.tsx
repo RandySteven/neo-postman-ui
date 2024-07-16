@@ -18,6 +18,7 @@ export const TestDataResponse = () => {
   return (
     <Fragment>
       <form className="h-full w-full my-5 grid content-center border border-green-500 py-2 pt-6 px-5">
+        <input type="hidden" name="test_data_id" value={testResponse?.id || ''} />
         <div className="flex mb-1">
           <label className="flex w-36 py-2">Result Status</label>
           <input
@@ -25,6 +26,16 @@ export const TestDataResponse = () => {
             className='flex w-64 w-full py-2 px-2 border border-green-500 rounded'
             placeholder="Expected, Unexpected, Error"
             value={testResponse?.resultStatus || ''}
+            readOnly
+          />
+        </div>
+        <div className="flex mb-1">
+          <label className="flex w-36 py-2">Response Time</label>
+          <input
+            type="text"
+            className='flex w-64 w-full py-2 px-2 border border-green-500 rounded'
+            placeholder="Expected, Unexpected, Error"
+            value={testResponse?.responseTime || ''}
             readOnly
           />
         </div>

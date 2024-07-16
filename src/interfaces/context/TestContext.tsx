@@ -3,7 +3,9 @@
 import React, { createContext, useState, ReactNode, useContext } from 'react';
 
 interface TestResponse {
+  id: number;
   resultStatus: string;
+  responseTime: number;
   actualResponseCode: string;
   actualResponse: string;
 }

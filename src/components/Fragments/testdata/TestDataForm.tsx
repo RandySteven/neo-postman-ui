@@ -117,9 +117,11 @@ export const TestDataForm = () => {
 
     const response = res.data.test_result;
     setTestResponse({
+      id: response.id,
       resultStatus: response.result_status,
       actualResponseCode: response.actual_response_code || '',
       actualResponse: response.actual_response || '',
+      responseTime: response.response_time || ''
     });
 
     localStorage.setItem("resultStatus", response.result_status);
