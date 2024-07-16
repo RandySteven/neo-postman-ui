@@ -29,7 +29,7 @@ export const TestDataForm = () => {
   const [expectedResponse, setExpectedResponse] = useState<KeyValue[]>([]);
   const [bgColor, setBgColor] = useState('');
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+  const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setTestDataRequest(prevState => ({
       ...prevState,
@@ -216,10 +216,10 @@ export const TestDataForm = () => {
           <label>Description</label>
           <textarea
             name="description"
-            className="w-full py-2 border border-blue-500 px-2 rounded"
+            className="w-full border border-blue-500 px-3 py-2"
             rows={4}
-            placeholder="description"
             value={testDataRequest.description}
+            onChange={handleChange}
           ></textarea>
         </div>
         <div className="my-2">

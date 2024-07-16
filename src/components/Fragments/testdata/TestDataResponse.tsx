@@ -1,11 +1,20 @@
 "use client";
 
 import { useTestContext } from "@/interfaces/context/TestContext";
-import { Fragment } from "react";
+import { ChangeEvent, Fragment, useState } from "react";
 
 export const TestDataResponse = () => {
   const { testResponse } = useTestContext();
-
+  const [resultStatusColor, setResultStatusColor] = useState('')
+  
+  const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+    if (e.target instanceof HTMLSelectElement) {
+      const selectedOption = e.target.options[e.target.selectedIndex];
+      const color = selectedOption.getAttribute('data-bg-color');
+      setResultStatusColor(color || '');
+    }
+  };
+  
   return (
     <Fragment>
       <form className="h-full w-full my-5 grid content-center border border-green-500 py-2 pt-6 px-5">
@@ -13,7 +22,7 @@ export const TestDataResponse = () => {
           <label className="flex w-36 py-2">Result Status</label>
           <input
             type="text"
-            className="flex w-64 w-full py-2 px-2 border border-green-500 rounded"
+            className='flex w-64 w-full py-2 px-2 border border-green-500 rounded'
             placeholder="Expected, Unexpected, Error"
             value={testResponse?.resultStatus || ''}
             readOnly
