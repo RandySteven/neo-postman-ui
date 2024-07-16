@@ -1,4 +1,4 @@
-export interface Records {
+export interface TestDataResponse {
     id: number,
     description: string,
     result_status: string,

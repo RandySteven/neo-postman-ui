@@ -1,9 +1,9 @@
 'use client'
 
-import { Records } from "@/interfaces/api/Record";
+import { TestDataResponse } from "@/interfaces/api/Record";
 import { Fragment, useState } from "react";
 
-export const TestDataCard = (record : Records) => {
+export const TestDataCard = (record : TestDataResponse) => {
    let resultStatusClass = ""
     if(record.result_status == "expected") {
         resultStatusClass=("text-white bg-green-500")

@@ -13,6 +13,9 @@ export const Navbar = () => {
                         <Link href="/testdata/create" className="hover:bg-green-600 py-2 px-4 rounded">
                             Test
                         </Link>
+                        <Link href="/testdata" className="hover:bg-green-600 py-2 px-4 rounded">
+                            History
+                        </Link>
                         <Link href="/testrecord" className="hover:bg-green-600 py-2 px-4 rounded">
                             See Records
                         </Link>

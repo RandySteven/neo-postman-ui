@@ -8,7 +8,7 @@ export async function getTestDatas() {
         // This will activate the closest `error.js` Error Boundary
         throw new Error('Failed to fetch data')
     }
-    const data = res.json()
+    const data = await res.json()
     return data
 }
 
