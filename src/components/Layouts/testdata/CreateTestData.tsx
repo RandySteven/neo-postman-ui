@@ -10,9 +10,15 @@ export const CreateTestData = () => {
         <TestProvider>
           <div className="grid grid-cols-2 px-2">
             <div className="mx-2">
+              <div className="text-center">
+                <span className="font-bold text-xl">Test Request</span>
+              </div>
               <TestDataForm />
             </div>
             <div className="mx-2">
+              <div className="text-center">
+                <span className="font-bold text-xl">Final Response</span>
+              </div>
               <TestDataResponse />
             </div>
           </div>

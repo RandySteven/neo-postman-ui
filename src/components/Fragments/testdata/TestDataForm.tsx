@@ -15,7 +15,7 @@ export const TestDataForm = () => {
   const [testDataRequest, setTestDataRequest] = useState<TestDataRequest>({
     method: "POST",
     path: "",
-    description: "test",
+    description: "",
     request_header: "",
     request_body: "",
     expected_response_code: 200,
@@ -146,8 +146,9 @@ export const TestDataForm = () => {
           <tr key={index}>
             <td className="border border-blue-500 p-2">
               <input
+                placeholder="key"
                 type="text"
-                className="w-full p-1"
+                className="w-full p-1 border border-black rounded"
                 value={row.key}
                 onChange={(e) => handleTableChange(index, type, e.target.value, row.value, row.isJson)}
               />
@@ -155,7 +156,7 @@ export const TestDataForm = () => {
             <td className="border border-blue-500 p-2">
               <input
                 type="text"
-                className="w-full p-1"
+                className="w-full p-1 border border-black rounded"
                 value={row.value}
                 onChange={(e) => handleTableChange(index, type, row.key, e.target.value, row.isJson)}
               />
@@ -210,6 +211,16 @@ export const TestDataForm = () => {
             value={testDataRequest.path}
             onChange={handleChange}
           />
+        </div>
+        <div className="my-2">
+          <label>Description</label>
+          <textarea
+            name="description"
+            className="w-full py-2 border border-blue-500 px-2 rounded"
+            rows={4}
+            placeholder="description"
+            value={testDataRequest.description}
+          ></textarea>
         </div>
         <div className="my-2">
           <label>Request Header</label>
