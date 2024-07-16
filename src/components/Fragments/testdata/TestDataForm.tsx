@@ -2,6 +2,7 @@
 
 import { createTestData } from "@/api/TestDataApi";
 import { TestDataRequest } from "@/interfaces/api/TestDataRequest";
+import { useTestContext } from "@/interfaces/context/TestContext";
 import { FormEvent, Fragment, useState, ChangeEvent, useEffect } from "react";
 
 interface KeyValue {
@@ -20,6 +21,8 @@ export const TestDataForm = () => {
     expected_response_code: 200,
     expected_response: "",
   });
+
+  const { setTestResponse } = useTestContext();
 
   const [requestHeaders, setRequestHeaders] = useState<KeyValue[]>([]);
   const [requestBody, setRequestBody] = useState<KeyValue[]>([]);
@@ -111,12 +114,20 @@ export const TestDataForm = () => {
     console.log(JSON.stringify(requestData));
     const res = await createTestData(requestData);
     console.log(res);
-    localStorage.setItem("resultStatus", res.data.test_result.result_status);
-    if (res.data.test_result.actual_response_code != null) {
-      localStorage.setItem("actualResponseCode", res.data.test_result.actual_response_code);
+
+    const response = res.data.test_result;
+    setTestResponse({
+      resultStatus: response.result_status,
+      actualResponseCode: response.actual_response_code || '',
+      actualResponse: response.actual_response || '',
+    });
+
+    localStorage.setItem("resultStatus", response.result_status);
+    if (response.actual_response_code != null) {
+      localStorage.setItem("actualResponseCode", response.actual_response_code);
     }
-    if (res.data.test_result.actual_response != null) {
-      localStorage.setItem("actualResponse", res.data.test_result.actual_response);
+    if (response.actual_response != null) {
+      localStorage.setItem("actualResponse", response.actual_response);
     }
   };
 
@@ -176,11 +187,7 @@ export const TestDataForm = () => {
 
   return (
     <Fragment>
-      <form
-        className="h-full w-full my-5 grid content-center border border-blue-500 py-2 pt-6 px-5"
-        method="POST"
-        onSubmit={handleSubmit}
-      >
+      <form className="h-full w-full my-5 grid content-center border border-blue-500 py-2 pt-6 px-5" method="POST" onSubmit={handleSubmit}>
         <div className="flex mb-1">
           <select
             id="method"
