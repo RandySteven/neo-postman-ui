@@ -4,3 +4,7 @@ export interface TestRecords {
     description: string,
     links: any
 }
+
+export interface TestRecordRequest {
+    testDataId: number;
+}

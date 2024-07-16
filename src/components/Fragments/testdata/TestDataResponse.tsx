@@ -1,12 +1,12 @@
 "use client";
 
 import { useTestContext } from "@/interfaces/context/TestContext";
-import { ChangeEvent, Fragment, useState } from "react";
+import { ChangeEvent, FormEvent, Fragment, useState } from "react";
 
 export const TestDataResponse = () => {
   const { testResponse } = useTestContext();
   const [resultStatusColor, setResultStatusColor] = useState('')
-  
+  const [testRecordRequest, setTestRecordRequest] = useState()
   const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     if (e.target instanceof HTMLSelectElement) {
       const selectedOption = e.target.options[e.target.selectedIndex];
@@ -14,7 +14,12 @@ export const TestDataResponse = () => {
       setResultStatusColor(color || '');
     }
   };
-  
+
+  const handleSubmit = (e : FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+
+  } 
+
   return (
     <Fragment>
       <form className="h-full w-full my-5 grid content-center border border-green-500 py-2 pt-6 px-5">
