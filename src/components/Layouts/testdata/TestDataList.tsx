@@ -5,6 +5,7 @@ import { TestDataResponse } from "@/interfaces/api/Record"
 import { TestDataCard } from "@/components/Fragments/testdata/TestDataCard"
 import { getTestDatas } from "@/api/TestDataApi"
 import { Loading } from "@/components/Elements/Loading";
+import { ErrorMessage } from "@/components/Elements/Error";
 
 export const TestDataList = () => {
     const [testDataResponses, setTestDataResponses] = useState<TestDataResponse[]>([])
@@ -27,7 +28,9 @@ export const TestDataList = () => {
     }, []);
 
     if (loading) return <div className="content-center"> <Loading /> </div>;
-    if (error) return <div>{error}</div>;
+    if (error) return <div>
+        <ErrorMessage error={error} />
+    </div>;
 
     return (
         <Fragment>
