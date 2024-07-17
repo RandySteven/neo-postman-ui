@@ -1,4 +1,5 @@
 import { getBaseHostList } from "@/api/DevApi";
+import { Loading } from "@/components/Elements/Loading";
 import { ChangeEvent, Fragment, useEffect, useState } from "react"
 
 interface ListButtonProps {
@@ -7,6 +8,8 @@ interface ListButtonProps {
 
 export const ListUrlButton = (props: ListButtonProps) => {
     const [baseUrl, setBaseUrl] = useState<{ [key: string]: string }>({});
+    const [loading, setLoading] = useState<boolean>(true);
+    const [error, setError] = useState<string | null>(null);
 
     useEffect(() => {
         const fetchBaseUrl = async () => {
@@ -15,11 +18,31 @@ export const ListUrlButton = (props: ListButtonProps) => {
                 setBaseUrl(response.data.baseUrl);
             } catch (error) {
                 console.error('Error fetching the base URL:', error);
+                setError('failed to fetch data')
+            } finally {
+                setLoading(false)
             }
         };
 
         fetchBaseUrl();
     }, []);
+
+    if(loading) {
+        return <>
+            <div className="">
+                <Loading />
+            </div>
+        </>
+    }
+
+    if(error) {
+        return <>
+            <div className="">
+                {error}
+            </div>
+        </>
+    }
+
     return <>
         <Fragment>
             <div className="flex">

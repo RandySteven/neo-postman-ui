@@ -4,6 +4,7 @@ import { Fragment, useEffect, useState } from "react"
 import { TestDataResponse } from "@/interfaces/api/Record"
 import { TestDataCard } from "@/components/Fragments/testdata/TestDataCard"
 import { getTestDatas } from "@/api/TestDataApi"
+import { Loading } from "@/components/Elements/Loading";
 
 export const TestDataList = () => {
     const [testDataResponses, setTestDataResponses] = useState<TestDataResponse[]>([])
@@ -25,7 +26,7 @@ export const TestDataList = () => {
         fetchTestResponses();
     }, []);
 
-    if (loading) return <div className="content-center">Loading...</div>;
+    if (loading) return <div className="content-center"> <Loading /> </div>;
     if (error) return <div>{error}</div>;
 
     return (

@@ -1,6 +1,7 @@
 "use client";
 
 import { getTestRecords } from "@/api/TestRecordApi";
+import { Loading } from "@/components/Elements/Loading";
 import { TestRecordsCard } from "@/components/Fragments/testrecord/TestRecordsCard";
 import { TestRecords } from "@/interfaces/api/TestRecords";
 import { Fragment, useEffect, useState } from "react";
@@ -25,7 +26,7 @@ export const TestRecordList = () => {
         fetchRecords();
     }, []);
 
-    if (loading) return <div className="content-center">Loading...</div>;
+    if (loading) return <div className="content-center"><Loading /></div>;
     if (error) return <div>{error}</div>;
 
     return (
