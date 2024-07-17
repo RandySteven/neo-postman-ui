@@ -4,6 +4,7 @@ import { createTestData } from "@/api/TestDataApi";
 import { TestDataRequest } from "@/interfaces/api/TestDataRequest";
 import { useTestContext } from "@/interfaces/context/TestContext";
 import { FormEvent, Fragment, useState, ChangeEvent, useEffect } from "react";
+import { ListUrlButton } from "../dev/ListUrlButton";
 
 interface KeyValue {
   key: string;
@@ -14,6 +15,7 @@ interface KeyValue {
 export const TestDataForm = () => {
   const [testDataRequest, setTestDataRequest] = useState<TestDataRequest>({
     method: "POST",
+    base_url: "",
     path: "",
     description: "",
     request_header: "",
@@ -191,6 +193,7 @@ export const TestDataForm = () => {
   return (
     <Fragment>
       <form className="h-full w-full my-5 grid content-center border border-blue-500 py-2 pt-6 px-5" method="POST" onSubmit={handleSubmit}>
+        <ListUrlButton handleChange={handleChange}/>
         <div className="flex mb-1">
           <select
             id="method"
