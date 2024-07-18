@@ -61,7 +61,7 @@ export const TestDataResponse = () => {
             rows={8}
             readOnly
             value={testResponse?.actualResponse || ''}
-          ></textarea>
+          >{testResponse?.actualResponse || ''}</textarea>
         </div>
         <div className="my-2">
           <button className="w-full bg-green-500 hover:bg-green-600 text-white py-4 rounded">

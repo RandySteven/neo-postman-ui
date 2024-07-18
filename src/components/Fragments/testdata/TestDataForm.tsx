@@ -15,7 +15,7 @@ interface KeyValue {
 export const TestDataForm = () => {
   const [testDataRequest, setTestDataRequest] = useState<TestDataRequest>({
     method: "POST",
-    base_url: "",
+    url_key: "",
     path: "",
     description: "",
     request_header: "",

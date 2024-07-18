@@ -1,6 +1,6 @@
 export interface TestDataRequest {
     method: string;
-    base_url: string;
+    url_key: string;
     path: string;
     description: string;
     request_header: any;
