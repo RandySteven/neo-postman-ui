@@ -12,6 +12,17 @@ export async function getTestDatas() {
     return data
 }
 
+export async function getTestDataDetail(id: number) {
+  const baseHost = `${ApiLink}/testdata/${id}`;
+  const res = await fetch(baseHost);
+  if (!res.ok) {
+      throw new Error('Failed to fetch data');
+  }
+  const data = await res.json();
+  return data;
+}
+
+
 export async function createTestData(request:TestDataRequest) {
     let baseHost = ApiLink + "/testdata";
 

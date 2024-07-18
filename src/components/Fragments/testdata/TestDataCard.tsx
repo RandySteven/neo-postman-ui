@@ -1,6 +1,7 @@
 'use client'
 
 import { TestDataResponse } from "@/interfaces/api/Record";
+import Link from "next/link";
 import { Fragment, useState } from "react";
 
 export const TestDataCard = (record : TestDataResponse) => {
@@ -12,7 +13,9 @@ export const TestDataCard = (record : TestDataResponse) => {
     }
     return <Fragment>
         <div className="border border-blue-200 hover:border-blue-300 rounded w-1/2 my-2 py-4 content-center px-3">
-            {record.id}. {record.description} <span className={resultStatusClass}>{record.result_status}</span>
+            <Link href={`/testdata/${record.id}`}>
+                {record.id}. {record.description} <span className={resultStatusClass}>{record.result_status}</span>
+            </Link>
         </div>
     </Fragment>
 }
