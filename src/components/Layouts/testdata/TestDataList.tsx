@@ -6,6 +6,7 @@ import { TestDataCard } from "@/components/Fragments/testdata/TestDataCard"
 import { getTestDatas } from "@/api/TestDataApi"
 import { Loading } from "@/components/Elements/Loading";
 import { ErrorMessage } from "@/components/Elements/Error";
+import Link from "next/link";
 
 export const TestDataList = () => {
     const [testDataResponses, setTestDataResponses] = useState<TestDataResponse[]>([])
@@ -35,14 +36,23 @@ export const TestDataList = () => {
     return (
         <Fragment>
             <div className="grid">
-                {testDataResponses.map((record: TestDataResponse) => (
-                    <TestDataCard 
-                        id={record.id} 
-                        description={record.description} 
-                        result_status={record.result_status} 
-                        is_saved={record.is_saved} 
-                        links={record.links}/>
-                ))}
+                {testDataResponses == null ? (
+                    <p>You still dont have test data {}
+                        <Link href="/testdata/create" className="text-blue-500 hover:text-blue-600">
+                            create one
+                        </Link>
+                    </p>
+                ): (
+                    testDataResponses.map((record: TestDataResponse) => (
+                        <TestDataCard 
+                            id={record.id} 
+                            description={record.description} 
+                            result_status={record.result_status} 
+                            is_saved={record.is_saved} 
+                            links={record.links}/>
+                    ))
+                )}
+                
             </div>
         </Fragment>
     )

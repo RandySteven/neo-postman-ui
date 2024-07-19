@@ -5,6 +5,7 @@ import { Loading } from "@/components/Elements/Loading";
 import { TestRecordsCard } from "@/components/Fragments/testrecord/TestRecordsCard";
 import { TestRecords } from "@/interfaces/api/TestRecords";
 import { Fragment, useEffect, useState } from "react";
+import Link from "next/link";
 
 export const TestRecordList = () => {
     const [records, setRecords] = useState<TestRecords[]>([]);
@@ -32,15 +33,22 @@ export const TestRecordList = () => {
     return (
         <Fragment>
             <div className="grid content-center">
-                {records.map((record: TestRecords) => (
+                {records == null ? ( // Check for empty array using length
+                    <p>No records found. {}
+                    <Link href="/testdata/create" className="text-blue-500 hover:text-blue-600">
+                        create one
+                    </Link></p> // Display a placeholder message
+                ) : (
+                records.map((record: TestRecords) => (
                     <TestRecordsCard
-                        key={record.id} // Adding a key for each component
+                        key={record.id}
                         id={record.id}
                         description={record.description}
                         links={record.links}
                         endpoint={record.endpoint}
                     />
-                ))}
+                    ))
+                )}
             </div>
         </Fragment>
     );
