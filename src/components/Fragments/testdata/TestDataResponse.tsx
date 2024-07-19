@@ -39,7 +39,7 @@ export const TestDataResponse = () => {
           <input
             type="text"
             className='flex w-64 w-full py-2 px-2 border border-green-500 rounded'
-            placeholder="Expected, Unexpected, Error"
+            placeholder="Response time in m.s"
             value={testResponse?.responseTime || ''}
             readOnly
           />
@@ -56,12 +56,9 @@ export const TestDataResponse = () => {
         </div>
         <div className="my-2">
           <label>Actual Response</label>
-          <textarea
-            className="w-full border border-green-500 px-3 py-2"
-            rows={8}
-            readOnly
-            value={testResponse?.actualResponse || ''}
-          >{testResponse?.actualResponse || ''}</textarea>
+          <div className="my-2 w-full bg-gray-200">
+            {testResponse?.actualResponseBody || ''}
+          </div>
         </div>
         <div className="my-2">
           <button className="w-full bg-green-500 hover:bg-green-600 text-white py-4 rounded">

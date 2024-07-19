@@ -7,7 +7,7 @@ interface TestResponse {
   resultStatus: string;
   responseTime: number;
   actualResponseCode: string;
-  actualResponse: string;
+  actualResponseBody: any;
 }
 
 interface TestContextType {

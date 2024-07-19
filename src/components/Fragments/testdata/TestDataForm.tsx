@@ -122,7 +122,7 @@ export const TestDataForm = () => {
       id: response.id,
       resultStatus: response.result_status,
       actualResponseCode: response.actual_response_code || '',
-      actualResponse: response.actual_response || '',
+      actualResponseBody: response?.actual_response_body || '',
       responseTime: response.response_time || ''
     });
 
@@ -131,7 +131,7 @@ export const TestDataForm = () => {
       localStorage.setItem("actualResponseCode", response.actual_response_code);
     }
     if (response.actual_response != null) {
-      localStorage.setItem("actualResponse", response.actual_response);
+      localStorage.setItem("actualResponseBody", response?.actual_response_body);
     }
   };
 

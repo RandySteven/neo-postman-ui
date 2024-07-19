@@ -53,6 +53,17 @@ export const TestDataPage: React.FC<TestDataDetailProps> = ({ params }) => {
         resultStatusClass=("text-white bg-yellow-500 ml-4 px-2 py-2 rounded")
     }
 
+    let methodClass = ""
+    if(testDataRes.method == "GET"){
+        methodClass = "text-white bg-green-500 ml-4 px-2 py-2 rounded"
+    }else if(testDataRes.method == "POST"){
+        methodClass = "text-white bg-yellow-500 ml-4 px-2 py-2 rounded"
+    }else if(testDataRes.method == "PUT"){
+        methodClass = "text-white bg-blue-500 ml-4 px-2 py-2 rounded"
+    }else {
+        methodClass = "text-white bg-red-500 ml-4 px-2 py-2 rounded"
+    }
+
     return (
         <Fragment>
             <div className="grid">
@@ -61,6 +72,9 @@ export const TestDataPage: React.FC<TestDataDetailProps> = ({ params }) => {
                 </div>
                 <div className="my-2">
                     <p className="text-l">Status: <span className={resultStatusClass}>{testDataRes?.result_status}</span> </p>
+                </div>
+                <div className="my-2">
+                    <p className="text-l">Method: <span className={methodClass}>{testDataRes?.method}</span> </p>
                 </div>
                 <div className="my-2">
                     <h1 className="text-xl font-bold">Request Header</h1>
@@ -78,6 +92,19 @@ export const TestDataPage: React.FC<TestDataDetailProps> = ({ params }) => {
                     </table>
                 </div>
                 <div className="my-2">
+                    <h1 className="text-xl font-bold">Request Header</h1>
+                    <table className="w-full border border-black text-center">
+                        <tr className="border border-black">
+                            <th className="border border-black">Expected Response Code</th>
+                            <th className="border border-black">Actual Response Code</th>
+                        </tr>
+                        <tr className="border border-black">
+                            <td className="border border-black">{testDataRes?.expected_response?.response_code}</td>
+                            <td className="border border-black">{testDataRes?.actual_response?.response_code}</td>
+                        </tr>
+                    </table>
+                </div>
+                <div className="my-2">
                     <h1 className="text-xl font-bold">Request Body</h1>
                     <pre className="bg-gray-200 py-2 px-2 border border-black">{JSON.stringify(JSON.parse(JSON.stringify(testDataRes?.request_body)), null, 2)}</pre>
                 </div>
@@ -85,11 +112,11 @@ export const TestDataPage: React.FC<TestDataDetailProps> = ({ params }) => {
                 <div className="my-2 grid grid-cols-2 px-2">
                     <div className="mx-2">
                         <p>Actual response:</p>
-                        <pre className="bg-gray-200 py-2 px-2 border border-black">{JSON.stringify(JSON.parse(JSON.stringify(testDataRes?.actual_response)), null, 2)}</pre>
+                        <pre className="bg-gray-200 py-2 px-2 border border-black">{JSON.stringify(JSON.parse(JSON.stringify(testDataRes?.actual_response?.response_body)), null, 2)}</pre>
                     </div>
                     <div className="mx-2">
                         <p>Expected respose</p>
-                        <pre className="bg-gray-200 py-2 px-2 border border-black">{JSON.stringify(JSON.parse(JSON.stringify(testDataRes?.expected_response)), null, 2)}</pre>
+                        <pre className="bg-gray-200 py-2 px-2 border border-black">{JSON.stringify(JSON.parse(JSON.stringify(testDataRes?.expected_response?.response_body)), null, 2)}</pre>
                     </div>
                 </div>
             </div>
