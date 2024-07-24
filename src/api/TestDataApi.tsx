@@ -50,3 +50,14 @@ export async function createTestData(request:TestDataRequest) {
     throw error; // Rethrow the error to the caller
   }
 }
+
+export async function saveTestData(id: number) {
+  let baseHost = ApiLink + "/testdata/" + id + "/saved"
+  
+  const res = await fetch(baseHost)
+  if(!res.ok) {
+    throw new Error('Failed to fetch data')
+  }
+  const data = await res.json()
+  return data
+}

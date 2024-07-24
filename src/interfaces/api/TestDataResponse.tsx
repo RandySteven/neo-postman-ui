@@ -1,5 +1,6 @@
 export interface TestDataResponse {
     id: number;
+    is_saved: boolean;
     endpoint: string;
     method: string;
     description: string;

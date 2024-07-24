@@ -122,7 +122,7 @@ export const TestDataForm = () => {
       id: response.id,
       resultStatus: response.result_status,
       actualResponseCode: response.actual_response_code || '',
-      actualResponseBody: response?.actual_response_body || '',
+      // actualResponseBody: response?.actual_response_body || '',
       responseTime: response.response_time || ''
     });
 

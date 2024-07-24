@@ -5,12 +5,13 @@ import { ErrorMessage } from "@/components/Elements/Error";
 import { Loading } from "@/components/Elements/Loading";
 import { TestDataDetailProps } from "@/interfaces/TestDataDetailProps";
 import { TestDataResponse } from "@/interfaces/api/TestDataResponse";
-import React, { Fragment, useEffect, useState } from "react";
+import React, { FormEvent, Fragment, useEffect, useState } from "react";
 
 export const TestDataPage: React.FC<TestDataDetailProps> = ({ params }) => {
     const [testDataRes, setTestDataRes] = useState<TestDataResponse>({
         id: 0,
         endpoint: "",
+        is_saved: false,
         method: "",
         description: "",
         result_status: "",
@@ -64,6 +65,12 @@ export const TestDataPage: React.FC<TestDataDetailProps> = ({ params }) => {
         methodClass = "text-white bg-red-500 ml-4 px-2 py-2 rounded"
     }
 
+    const handleSubmit = (e : FormEvent<HTMLFormElement>) => {
+        e.preventDefault()
+        
+
+    }  
+
     return (
         <Fragment>
             <div className="grid">
@@ -76,6 +83,16 @@ export const TestDataPage: React.FC<TestDataDetailProps> = ({ params }) => {
                 <div className="my-2">
                     <p className="text-l">Method: <span className={methodClass}>{testDataRes?.method}</span> </p>
                 </div>
+                {testDataRes?.is_saved == false ? (
+                    <div>
+                        <form method="GET" onChange={handleSubmit}>
+                            <input hidden name="id" value={testDataRes?.id} />
+                            <button className="bg-blue-500 text-white px-2 py-2 rounded hover:bg-blue-600">Save</button>
+                        </form>
+                    </div>
+                ) : (
+                    <div></div>) 
+                }
                 <div className="my-2">
                     <h1 className="text-xl font-bold">Request Header</h1>
                     <table className="w-full border border-black text-center">

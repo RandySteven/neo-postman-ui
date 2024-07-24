@@ -57,7 +57,7 @@ export const TestDataResponse = () => {
         <div className="my-2">
           <label>Actual Response</label>
           <div className="my-2 w-full bg-gray-200">
-            {testResponse?.actualResponseBody || ''}
+            {/* {testResponse?.actualResponseBody || ''} */}
           </div>
         </div>
         <div className="my-2">
