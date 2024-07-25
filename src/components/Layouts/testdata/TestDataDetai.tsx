@@ -1,11 +1,12 @@
 "use client";
 
-import { getTestDataDetail } from "@/api/TestDataApi";
+import { getTestDataDetail, saveTestData } from "@/api/TestDataApi";
 import { ErrorMessage } from "@/components/Elements/Error";
 import { Loading } from "@/components/Elements/Loading";
 import { TestDataDetailProps } from "@/interfaces/TestDataDetailProps";
 import { TestDataResponse } from "@/interfaces/api/TestDataResponse";
-import React, { FormEvent, Fragment, useEffect, useState } from "react";
+import { stringify } from "json5";
+import React, { FormEvent, Fragment, MouseEventHandler, useEffect, useState } from "react";
 
 export const TestDataPage: React.FC<TestDataDetailProps> = ({ params }) => {
     const [testDataRes, setTestDataRes] = useState<TestDataResponse>({
@@ -22,6 +23,10 @@ export const TestDataPage: React.FC<TestDataDetailProps> = ({ params }) => {
     });
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
+
+    // const onClick = async (e : MouseEventHandler<HTMLIn>) => {
+        // console.log(savedRes.message)
+    // }
 
     useEffect(() => {
         const fetchTestDataRes = async () => {
@@ -64,12 +69,7 @@ export const TestDataPage: React.FC<TestDataDetailProps> = ({ params }) => {
     }else {
         methodClass = "text-white bg-red-500 ml-4 px-2 py-2 rounded"
     }
-
-    const handleSubmit = (e : FormEvent<HTMLFormElement>) => {
-        e.preventDefault()
-        
-
-    }  
+  
 
     return (
         <Fragment>
@@ -85,13 +85,19 @@ export const TestDataPage: React.FC<TestDataDetailProps> = ({ params }) => {
                 </div>
                 {testDataRes?.is_saved == false ? (
                     <div>
-                        <form method="GET" onChange={handleSubmit}>
-                            <input hidden name="id" value={testDataRes?.id} />
-                            <button className="bg-blue-500 text-white px-2 py-2 rounded hover:bg-blue-600">Save</button>
+                        <form method="GET">
+                            <input type="button" className="bg-blue-500 text-white px-2 py-2 rounded hover:bg-blue-600" value="Save" onClick={async () => {
+                                const savedRes = await saveTestData(testDataRes?.id)
+                                console.log(savedRes)
+                            }}/>
                         </form>
                     </div>
                 ) : (
-                    <div></div>) 
+                    <div>
+                        <form method="GET">
+                            <input type="button" className="bg-red-500 text-white px-2 py-2 rounded hover:bg-red-600" value="Deleted"/>
+                        </form>
+                    </div>) 
                 }
                 <div className="my-2">
                     <h1 className="text-xl font-bold">Request Header</h1>
@@ -103,7 +109,7 @@ export const TestDataPage: React.FC<TestDataDetailProps> = ({ params }) => {
                         {Object.entries(testDataRes?.request_header || {}).map(([key, value])  => (
                             <tr className="border border-black">
                                 <td className="border border-black">{key}</td>
-                                <td className="border border-black">{value}</td>
+                                <td className="border border-black">{`${value}`}</td>
                             </tr>
                         ))}
                     </table>

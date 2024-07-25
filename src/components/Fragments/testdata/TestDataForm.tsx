@@ -192,68 +192,72 @@ export const TestDataForm = () => {
 
   return (
     <Fragment>
-      <form className="h-full w-full my-5 grid content-center border border-blue-500 py-2 pt-6 px-5" method="POST" onSubmit={handleSubmit}>
-        <ListUrlButton handleChange={handleChange}/>
-        <div className="flex mb-1">
-          <select
-            id="method"
-            className="mr-3 flex w-36 py-2 bg-gray-400 text-white border rounded"
-            name="method"
-            value={testDataRequest.method}
-            onChange={handleChange}
-            style={{ backgroundColor: bgColor }}
-          >
-            <option value="POST" data-bg-color="orange">POST</option>
-            <option value="GET" data-bg-color="green">GET</option>
-            <option value="PUT" data-bg-color="blue">PUT</option>
-            <option value="DELETE" data-bg-color="red">DELETE</option>
-          </select>
-          <input
-            name="path"
-            type="text"
-            className="flex w-36 w-full py-2 px-2 border border-black"
-            placeholder="/endpoint"
-            value={testDataRequest.path}
-            onChange={handleChange}
-          />
+      <form className="h-full w-full my-5 flex content-center border border-blue-500 py-2 pt-6 px-5" method="POST" onSubmit={handleSubmit}>
+        <div className="w-1/3">
+          <ListUrlButton handleChange={handleChange}/>
         </div>
-        <div className="my-2">
-          <label>Description</label>
-          <textarea
-            name="description"
-            className="w-full border border-blue-500 px-3 py-2"
-            rows={4}
-            value={testDataRequest.description}
-            onChange={handleChange}
-          ></textarea>
-        </div>
-        <div className="my-2">
-          <label>Request Header</label>
-          {renderTable(requestHeaders, "requestHeader")}
-        </div>
-        <div className="my-2">
-          <label>Request Body</label>
-          {renderTable(requestBody, "requestBody")}
-        </div>
-        <div className="flex my-2">
-          <label className="w-36 py-2">Expected RC</label>
-          <input
-            name="expected_response_code"
-            className="w-full py-2 border border-blue-500 px-2 rounded"
-            type="text"
-            placeholder="Ex. 200, 400, 500"
-            value={testDataRequest.expected_response_code}
-            onChange={handleChange}
-          />
-        </div>
-        <div className="my-2">
-          <label>Expected Response</label>
-          {renderTable(expectedResponse, "expectedResponse")}
-        </div>
-        <div className="my-2">
-          <button className="w-full bg-blue-500 hover:bg-blue-600 text-white py-4 rounded" type="submit">
-            Send
-          </button>
+        <div className="w-2/3">
+          <div className="flex mb-1">
+            <select
+              id="method"
+              className="mr-3 flex w-36 py-2 bg-gray-400 text-white border rounded"
+              name="method"
+              value={testDataRequest.method}
+              onChange={handleChange}
+              style={{ backgroundColor: bgColor }}
+            >
+              <option value="POST" data-bg-color="orange">POST</option>
+              <option value="GET" data-bg-color="green">GET</option>
+              <option value="PUT" data-bg-color="blue">PUT</option>
+              <option value="DELETE" data-bg-color="red">DELETE</option>
+            </select>
+            <input
+              name="path"
+              type="text"
+              className="flex w-36 w-full py-2 px-2 border border-black"
+              placeholder="/endpoint"
+              value={testDataRequest.path}
+              onChange={handleChange}
+            />
+          </div>
+          <div className="my-2">
+            <label>Description</label>
+            <textarea
+              name="description"
+              className="w-full border border-blue-500 px-3 py-2"
+              rows={4}
+              value={testDataRequest.description}
+              onChange={handleChange}
+            ></textarea>
+          </div>
+          <div className="my-2">
+            <label>Request Header</label>
+            {renderTable(requestHeaders, "requestHeader")}
+          </div>
+          <div className="my-2">
+            <label>Request Body</label>
+            {renderTable(requestBody, "requestBody")}
+          </div>
+          <div className="flex my-2">
+            <label className="w-36 py-2">Expected RC</label>
+            <input
+              name="expected_response_code"
+              className="w-full py-2 border border-blue-500 px-2 rounded"
+              type="text"
+              placeholder="Ex. 200, 400, 500"
+              value={testDataRequest.expected_response_code}
+              onChange={handleChange}
+            />
+          </div>
+          <div className="my-2">
+            <label>Expected Response</label>
+            {renderTable(expectedResponse, "expectedResponse")}
+          </div>
+          <div className="my-2">
+            <button className="w-full bg-blue-500 hover:bg-blue-600 text-white py-4 rounded" type="submit">
+              Send
+            </button>
+          </div>
         </div>
       </form>
     </Fragment>
