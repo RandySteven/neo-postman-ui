@@ -118,12 +118,13 @@ export const TestDataForm = () => {
     console.log(res);
 
     const response = res.data.test_result;
+    let responseTime = response.response_time / 1000
     setTestResponse({
       id: response.id,
       resultStatus: response.result_status,
       actualResponseCode: response.actual_response_code || '',
       // actualResponseBody: response?.actual_response_body || '',
-      responseTime: response.response_time || ''
+      responseTime: responseTime 
     });
 
     localStorage.setItem("resultStatus", response.result_status);

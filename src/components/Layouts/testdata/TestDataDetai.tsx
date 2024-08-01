@@ -73,9 +73,13 @@ export const TestDataPage: React.FC<TestDataDetailProps> = ({ params }) => {
 
     return (
         <Fragment>
+            Ingat laundry handuk tunggu kering
             <div className="grid">
                 <div className="my-2">
                     <h1 className="text-xl font-bold">Test Data ID: {testDataRes?.id}</h1>
+                </div>
+                <div className="my-2">
+                    <p className="text-l">Endpoint: <span className="bg-gray-200 border border-black rounded text-black px-2 py-1">{testDataRes?.endpoint}</span> </p>
                 </div>
                 <div className="my-2">
                     <p className="text-l">Status: <span className={resultStatusClass}>{testDataRes?.result_status}</span> </p>
