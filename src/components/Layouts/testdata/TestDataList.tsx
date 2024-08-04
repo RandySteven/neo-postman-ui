@@ -7,6 +7,7 @@ import { getTestDatas } from "@/api/TestDataApi"
 import { Loading } from "@/components/Elements/Loading";
 import { ErrorMessage } from "@/components/Elements/Error";
 import Link from "next/link";
+import { Search } from "@/components/Elements/Search";
 
 export const TestDataList = () => {
     const [testDataResponses, setTestDataResponses] = useState<TestDataResponse[]>([])
@@ -35,6 +36,7 @@ export const TestDataList = () => {
 
     return (
         <Fragment>
+            <Search />
             <div className="grid">
                 {testDataResponses == null ? (
                     <p>You still dont have test data {}
