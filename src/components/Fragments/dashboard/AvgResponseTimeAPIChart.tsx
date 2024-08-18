@@ -24,9 +24,9 @@ export const TestAvgResponseTimeChart = () => {
                 const uris: string[] = [];
                 const avgTimes: number[] = [];
 
-                response.data.results.forEach(res => {
-                    uris.push(res.uri);
-                    avgTimes.push(res.avg_time);
+                response.data.results.forEach((resu: { uri: string; avg_time: number; }) => {
+                    uris.push(resu.uri);
+                    avgTimes.push(resu.avg_time);
                 });
 
                 setListUri(uris);
