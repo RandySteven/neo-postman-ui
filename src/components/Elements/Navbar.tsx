@@ -20,6 +20,9 @@ export const Navbar = () => {
                             <Link href="/testrecord" className="hover:bg-green-600 py-2 px-4 rounded">
                                 See Records
                             </Link>
+                            <Link href="/dashboard" className="hover:bg-green-600 py-2 px-4 rounded">
+                                Dashboard
+                            </Link>
                         </div>
                     </div>
                 </div>  
