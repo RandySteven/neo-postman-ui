@@ -10,3 +10,13 @@ export async function ResultCount() {
     const data = await res.json()
     return data
 }
+
+export async function AvgResponseTimeAPI() {
+    let link = ApiLink + "/dashboard/avg-response-time"
+    const res = await fetch(link)
+    if (!res.ok) {
+        throw new Error('Failed to fetch data')
+    }
+    const data = await res.json()
+    return data
+}
