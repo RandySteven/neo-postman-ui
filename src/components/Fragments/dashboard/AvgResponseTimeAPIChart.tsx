@@ -1,26 +1,19 @@
-'use client'
+'use client';
 import { AvgResponseTimeAPI } from "@/api/DashboardApi";
 import { Loading } from "@/components/Elements/Loading";
-import { Chart, ArcElement, Tooltip, Legend, BarController, CategoryScale, LinearScale, BarElement } from "chart.js";
-import { Fragment, useEffect, useState, useRef } from "react";
-
-Chart.register(BarController, ArcElement, Tooltip, Legend, CategoryScale, LinearScale, BarElement);
+import { Fragment, useEffect, useState } from "react";
+import Plot from 'react-plotly.js';
 
 export const TestAvgResponseTimeChart = () => {
-    const canvasRef = useRef<HTMLCanvasElement | null>(null);
-    const [result, setResult] = useState<AvgResponeTimePerAPIsResponse[]>([]);
     const [listUri, setListUri] = useState<string[]>([]);
     const [listAvgTime, setListAvgTime] = useState<number[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
-    const [chartInstance, setChartInstance] = useState<Chart | null>(null);
 
     useEffect(() => {
         const fetchAvgResponseTimeAPI = async () => {
             try {
                 const response = await AvgResponseTimeAPI();
-                setResult(response.data.results);
-
                 const uris: string[] = [];
                 const avgTimes: number[] = [];
 
@@ -41,40 +34,6 @@ export const TestAvgResponseTimeChart = () => {
         fetchAvgResponseTimeAPI();
     }, []);
 
-    useEffect(() => {
-        if (!loading && !error && canvasRef.current) {
-            if (chartInstance) {
-                chartInstance.destroy();
-            }
-            const newChartInstance = new Chart(canvasRef.current, {
-                type: "bar",
-                data: {
-                    labels: listUri,
-                    datasets: [
-                        {
-                            label: 'Average Response Time',
-                            data: listAvgTime,
-                            backgroundColor: 'blue',
-                        },
-                    ],
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    scales: {
-                        x: {
-                            beginAtZero: true,
-                        },
-                        y: {
-                            beginAtZero: true,
-                        },
-                    },
-                },
-            });
-            setChartInstance(newChartInstance);
-        }
-    }, [loading, error, listUri, listAvgTime]);
-
     if (loading) {
         return (
             <div>
@@ -93,8 +52,38 @@ export const TestAvgResponseTimeChart = () => {
 
     return (
         <Fragment>
-            <div style={{ height: '400px' }}>
-                <canvas ref={canvasRef} id="myChart"></canvas>
+            <div style={{ height: '600px' }}>
+                <Plot
+                    data={[
+                        {
+                            x: listUri,
+                            y: listAvgTime,
+                            type: 'bar',
+                            marker: { color: 'blue' },
+                        },
+                    ]}
+                    layout={{
+                        title: 'Average Response Time per API',
+                        xaxis: {
+                            title: 'API URI',
+                            automargin: true,
+                        },
+                        yaxis: {
+                            title: 'Average Response Time',
+                            automargin: true,
+                            zeroline: true,
+                        },
+                        margin: {
+                            l: 10,
+                            r: 50,
+                            b: 40,
+                            t: 50,
+                            pad: 4
+                        },
+                    }}
+                    style={{ width: '100%', height: '100%' }}
+                    useResizeHandler={true}
+                />
             </div>
         </Fragment>
     );

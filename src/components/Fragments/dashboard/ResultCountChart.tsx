@@ -1,20 +1,16 @@
-'use client'
+'use client';
 import { ResultCount } from "@/api/DashboardApi";
 import { Loading } from "@/components/Elements/Loading";
-import { Chart, DoughnutController, ArcElement, Tooltip, Legend } from "chart.js";
-import { Fragment, useEffect, useState, useRef } from "react";
-
-Chart.register(DoughnutController, ArcElement, Tooltip, Legend);
+import { Fragment, useEffect, useState } from "react";
+import Plot from 'react-plotly.js';
 
 export const TestResultCountChart = () => {
-    const canvasRef = useRef<HTMLCanvasElement | null>(null);
     const [result, setResult] = useState<TestResultResponse>({
         expected: 0,
         unexpected: 0
     });
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
-    const [chartInstance, setChartInstance] = useState<Chart | null>(null);
 
     useEffect(() => {
         const fetchTestResultResponse = async () => {
@@ -30,31 +26,6 @@ export const TestResultCountChart = () => {
 
         fetchTestResultResponse();
     }, []);
-
-    useEffect(() => {
-        if (!loading && !error && canvasRef.current) {
-            if (chartInstance) {
-                chartInstance.destroy();
-            }
-            const newChartInstance = new Chart(canvasRef.current, {
-                type: "doughnut",
-                data: {
-                    labels: ["expected", "unexpected"],
-                    datasets: [
-                        {
-                            data: [result.expected, result.unexpected],
-                            backgroundColor: ['green', 'yellow'],
-                        },
-                    ],
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                },
-            });
-            setChartInstance(newChartInstance);
-        }
-    }, [loading, error, result]);
 
     if (loading) {
         return (
@@ -75,7 +46,34 @@ export const TestResultCountChart = () => {
     return (
         <Fragment>
             <div style={{ height: '400px' }}>
-                <canvas ref={canvasRef} id="myChart"></canvas>
+                <Plot
+                    data={[
+                        {
+                            values: [result.expected, result.unexpected],
+                            labels: ["Expected", "Unexpected"],
+                            type: 'pie',
+                            hole: 0.4, // This makes it a doughnut chart
+                            marker: {
+                                colors: ['green', 'yellow'],
+                            },
+                        },
+                    ]}
+                    layout={{
+                        title: 'Test Result Count',
+                        showlegend: true,
+                        margin: {
+                            l: 20,
+                            r: 20,
+                            b: 20,
+                            t: 40,
+                            pad: 4
+                        },
+                        height: 400,
+                        width: 400,
+                    }}
+                    style={{ width: '100%', height: '100%' }}
+                    useResizeHandler={true}
+                />
             </div>
         </Fragment>
     );
