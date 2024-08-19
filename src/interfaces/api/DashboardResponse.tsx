@@ -15,3 +15,9 @@ interface CountMethodResponse {
     put: number
     delete: number
 }
+
+interface ActiveServiceResponse {
+    key: string
+    value: number
+    image: string
+}

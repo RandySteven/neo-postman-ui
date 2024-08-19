@@ -1,3 +1,5 @@
+"use client"
+import { ActiveServiceCard } from "@/components/Fragments/dashboard/ActiveServiceCard"
 import { TestAvgResponseTimeChart } from "@/components/Fragments/dashboard/AvgResponseTimeAPIChart"
 import { CountMethodChart } from "@/components/Fragments/dashboard/CountMethodChart"
 import { TestResultCountChart } from "@/components/Fragments/dashboard/ResultCountChart"
@@ -8,6 +10,9 @@ export const Dashboard = () => {
         <Fragment>
             <div>
                 <div className="flex-grow p-6 overflow-auto bg-gray-200">
+                    <div className="my-2">
+                        <ActiveServiceCard />
+                    </div>
                     <div className="grid grid-cols-3 gap-6">
                         <div className="col-span-3 bg-white border border-gray-300">
                             <TestAvgResponseTimeChart />

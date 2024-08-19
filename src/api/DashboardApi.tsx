@@ -30,3 +30,13 @@ export async function CountMethodAPI() {
     const data = await res.json()
     return data
 }
+
+export async function GetActiveService() {
+    let link = ApiLink + "/dashboard/active-services"
+    const res = await fetch(link)
+    if (!res.ok) {
+        throw new Error('Failed to fetch data')
+    }
+    const data = await res.json()
+    return data
+}
